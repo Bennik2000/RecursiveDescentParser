@@ -1,4 +1,8 @@
-﻿namespace StateMachine
+﻿using System;
+using System.Diagnostics;
+using StateMachineCompiler.Visitors;
+
+namespace StateMachineCompiler
 {
     class Program
     {
@@ -56,18 +60,29 @@
              *
              */
 
+			var validInput = "event switch_on, switch_off, timer;                      \n" +
+                             "in initial state OFF:                                    \n" +
+                             "  on switch_on goto ON: turn_on_light, set_timer_5min;   \n" +
+                             "in state ON:                                             \n" +
+                             "  on switch_off, timer goto OFF: turn_off_light;         \n" +
+                             "  on switch_on goto bar: turn_off_light;                 \n" +
+                             "in state bar:                                            \n" +
+                             "  on timer goto bar: turn_off_light;                     \n";
+
+			var parser = new Parser(validInput);
+
+            var stateMachine = parser.Parse();
+
+			var symbolTable = new SymbolTable();
+
+            stateMachine.Accept(new SymbolTableBuilder(symbolTable));
+            stateMachine.Accept(new EventResolver(symbolTable));
+            stateMachine.Accept(new StateResolver(symbolTable));
+			stateMachine.Accept(new ActionResolver(symbolTable));
+            stateMachine.Accept(new TransitionSemanticChecker());
 
 
-			var validInput = "event switch_on, switch_off, timer;\n" +
-                             "in initial state OFF:                           \n" +
-                             "    on switch_on goto ON: turn_on_light, set_timer_5min;\n" +
-                             "in state ON:                           \n" +
-                             "    on switch_off, timer goto OFF: turn_off_light;\n";
-
-
-            var parser = new Parser(validInput);
-
-            var result = parser.Parse();
-        }
+			// If the program reaches the end the input is valid
+		}
     }
 }

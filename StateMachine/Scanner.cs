@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace StateMachine
+namespace StateMachineCompiler
 {
     public class Scanner
     {

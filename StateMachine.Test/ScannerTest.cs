@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
-namespace StateMachine.Test
+namespace StateMachineCompiler.Test
 {
     [TestClass]
     public class ScannerTest

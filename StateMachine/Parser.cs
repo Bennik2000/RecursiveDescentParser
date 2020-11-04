@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using StateMachineCompiler.Ast;
+using StateMachineCompiler.Errors;
 
 
-namespace StateMachine
+namespace StateMachineCompiler
 {
     public class Parser
     {
@@ -14,7 +17,7 @@ namespace StateMachine
             _scanner = new Scanner(input);
         }
 
-        public StateMachineModel Parse()
+        public StateMachine Parse()
         {
             Consume();
 
@@ -26,16 +29,16 @@ namespace StateMachine
         }
 
 
-        private StateMachineModel StateMachine()
+        private StateMachine StateMachine()
         {
             var eventDeclarations = EventDeclaration();
-            var stateDeclarations = StateDeclarations();
+            var states = States();
 
-            return new StateMachineModel(
-                eventDeclarations, stateDeclarations);
+            return new StateMachine(
+                eventDeclarations, states);
         }
 
-        private EventDeclaration EventDeclaration()
+        private EventList EventDeclaration()
         {
             Match(TokenType.Event);
 
@@ -43,7 +46,9 @@ namespace StateMachine
 
             Match(TokenType.Terminator);
 
-            return new EventDeclaration(idList);
+            var events = idList.Select(id => new Event(id)).ToList();
+
+            return new EventList(events);
         }
 
         private List<string> IdList()
@@ -67,30 +72,30 @@ namespace StateMachine
             return token.Value;
         }
 
-        private List<StateDeclaration> StateDeclarations()
+        private List<State> States()
         {
-            var stateDeclarations = new List<StateDeclaration>();
+            var states = new List<State>();
 
-            stateDeclarations.Add(StateDeclaration());
+            states.Add(State());
 
             if (_lookahead.Type == TokenType.In)
             {
-                stateDeclarations.AddRange(StateDeclarations());
+                states.AddRange(States());
             }
 
-            return stateDeclarations;
+            return states;
         }
 
-        private StateDeclaration StateDeclaration()
+        private State State()
         {
             Match(TokenType.In);
             var isInitial = OptionalInitial();
             Match(TokenType.State);
             var id = Match(TokenType.Id);
             Match(TokenType.Colon);
-            var transitions = StateTransition();
+            var transitions = StateTransitions();
 
-            return new StateDeclaration(id.Value, isInitial, transitions);
+            return new State(id.Value, isInitial, transitions);
         }
 
         private bool OptionalInitial()
@@ -103,6 +108,20 @@ namespace StateMachine
             }
 
             return false;
+        }
+
+        private StateTransitionList StateTransitions()
+        {
+            var stateTransitions = new List<StateTransition>();
+
+            stateTransitions.Add(StateTransition());
+
+            if (_lookahead.Type == TokenType.On)
+            {
+                stateTransitions.AddRange(StateTransitions().Transitions);
+            }
+
+            return new StateTransitionList(stateTransitions);
         }
 
         private StateTransition StateTransition()

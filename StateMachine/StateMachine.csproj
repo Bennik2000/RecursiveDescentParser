@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FEC9D785-AFB4-4A5A-AA24-74DA7C273A10}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>StateMachine</RootNamespace>
-    <AssemblyName>StateMachine</AssemblyName>
+    <RootNamespace>StateMachineCompiler</RootNamespace>
+    <AssemblyName>StateMachineCompiler</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,16 +43,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ast\AstNode.cs" />
+    <Compile Include="Ast\Event.cs" />
+    <Compile Include="Ast\EventList.cs" />
+    <Compile Include="Ast\Identifiable.cs" />
+    <Compile Include="Ast\Action.cs" />
+    <Compile Include="Ast\StateTransitionList.cs" />
     <Compile Include="Parser.cs" />
-    <Compile Include="StateMachineModel.cs" />
-    <Compile Include="SyntaxErrorException.cs" />
+    <Compile Include="Ast\State.cs" />
+    <Compile Include="Ast\StateMachine.cs" />
+    <Compile Include="Ast\StateTransition.cs" />
+    <Compile Include="Errors\SyntaxErrorException.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scanner.cs" />
+    <Compile Include="Errors\ActionNotFoundException.cs" />
+    <Compile Include="Errors\EventNotFoundException.cs" />
+    <Compile Include="TokenType.cs" />
+    <Compile Include="Visitors\MultipleEventsForState.cs" />
+    <Compile Include="Errors\StateNotFoundException.cs" />
+    <Compile Include="Visitors\SymbolTable.cs" />
+    <Compile Include="Visitors\Visitor.cs" />
+    <Compile Include="Visitors\ActionResolver.cs" />
+    <Compile Include="Errors\EventDeclaredMultipleTimesException.cs" />
+    <Compile Include="Visitors\EventResolver.cs" />
+    <Compile Include="Errors\MultipleInitialStatesException.cs" />
+    <Compile Include="Errors\StateDeclaredMultipleTimesException.cs" />
+    <Compile Include="Visitors\StateResolver.cs" />
+    <Compile Include="Visitors\SymbolTableBuilder.cs" />
+    <Compile Include="Errors\SemanticErrorException.cs" />
+    <Compile Include="Visitors\TransitionSemanticChecker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

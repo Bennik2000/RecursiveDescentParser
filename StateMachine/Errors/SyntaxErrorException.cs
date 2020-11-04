@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StateMachine
+namespace StateMachineCompiler.Errors
 {
     public class SyntaxErrorException : Exception
     {
