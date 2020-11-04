@@ -3,7 +3,10 @@ using Action = StateMachineCompiler.Ast.Action;
 
 namespace StateMachineCompiler.Visitors
 {
-    class SymbolTableBuilder : Visitor
+    /// <summary>
+    /// Builds the symbol table for the AST
+    /// </summary>
+    public class SymbolTableBuilder : Visitor
     {
         public SymbolTable SymbolTable { get; }
 

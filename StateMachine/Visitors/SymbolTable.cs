@@ -4,7 +4,11 @@ using StateMachineCompiler.Errors;
 
 namespace StateMachineCompiler.Visitors
 {
-    class SymbolTable
+    /// <summary>
+    /// The symbol table contains the mapping from id to either an event, state or action
+    /// It also contains the initial state of the state machine
+    /// </summary>
+    public class SymbolTable
     {
         public Dictionary<string, Event> Events { get; set; }
         public Dictionary<string, State> States { get; set; }

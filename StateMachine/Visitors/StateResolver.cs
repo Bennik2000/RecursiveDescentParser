@@ -2,7 +2,10 @@
 
 namespace StateMachineCompiler.Visitors
 {
-    class StateResolver : Visitor
+    /// <summary>
+    /// Resolves the target state of a StateTransition
+    /// </summary>
+    public class StateResolver : Visitor
     {
         public SymbolTable SymbolTable { get; set; }
 

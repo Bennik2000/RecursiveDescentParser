@@ -61,7 +61,7 @@
     <Compile Include="Errors\ActionNotFoundException.cs" />
     <Compile Include="Errors\EventNotFoundException.cs" />
     <Compile Include="TokenType.cs" />
-    <Compile Include="Visitors\MultipleEventsForState.cs" />
+    <Compile Include="Errors\MultipleEventsForStateException.cs" />
     <Compile Include="Errors\StateNotFoundException.cs" />
     <Compile Include="Visitors\SymbolTable.cs" />
     <Compile Include="Visitors\Visitor.cs" />

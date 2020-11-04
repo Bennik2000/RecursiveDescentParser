@@ -1,9 +1,12 @@
-﻿using System.Linq;
-using StateMachineCompiler.Ast;
+﻿using StateMachineCompiler.Ast;
+using System.Linq;
 
 namespace StateMachineCompiler.Visitors
 {
-    class EventResolver : Visitor
+    /// <summary>
+    /// Resolves the events of a StateTransition
+    /// </summary>
+    public class EventResolver : Visitor
     {
         public SymbolTable SymbolTable { get; set; }
 
