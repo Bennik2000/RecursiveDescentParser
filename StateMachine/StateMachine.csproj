@@ -49,6 +49,8 @@
     <Compile Include="Ast\Identifiable.cs" />
     <Compile Include="Ast\Action.cs" />
     <Compile Include="Ast\StateTransitionList.cs" />
+    <Compile Include="CodeGeneration\CCodeGenerator.cs" />
+    <Compile Include="CodeGeneration\CodeGenerator.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Ast\State.cs" />
     <Compile Include="Ast\StateMachine.cs" />

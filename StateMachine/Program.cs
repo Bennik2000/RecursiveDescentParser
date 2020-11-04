@@ -11,7 +11,7 @@ namespace StateMachineCompiler
 			/**
              *
              *
-             * Grammatik:
+             * Grammatik (Name der Nichtterminale mitlerweile nicht mehr konsistent mit code!):
 			 *
 			G={N,T, P, s}
 

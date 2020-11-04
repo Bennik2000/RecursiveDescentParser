@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeGeneration\CCodeGeneratorTest.cs" />
     <Compile Include="ParserTest.cs" />
     <Compile Include="ScannerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
